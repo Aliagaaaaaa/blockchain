@@ -1,0 +1,24 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "blockchain",
+	"main": ".open-next/worker.js",
+	"compatibility_date": "2025-03-07",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"assets": {
+		"binding": "ASSETS",
+		"directory": ".open-next/assets"
+	},
+	"d1_databases": [
+		{
+			"binding": "CLOUDFLARE_DB",
+			"database_name": "blockchain_users",
+			"database_id": "bc7f2a74-b72f-4ed6-81ab-16a6b2d8e4ab"
+		}
+	],
+	"observability": {
+		"enabled": true,
+		"head_sampling_rate": 1
+	}
+}
