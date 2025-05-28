@@ -23,9 +23,7 @@ export async function GET(req: NextRequest) {
       }, { status: 400 });
     }
 
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 
-                   process.env.NEXT_PUBLIC_FRONTEND_URL || 
-                   'http://localhost:3000';
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
     
     // Incluir wallet address en el return_to URL
     const REDIRECT_URL = `${baseUrl}/api/steam-callback?wallet=${encodeURIComponent(walletAddress)}`;

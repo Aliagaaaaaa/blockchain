@@ -3,7 +3,7 @@ import { getCloudflareContext } from '@opennextjs/cloudflare';
 
 // Configuración de OpenID para Steam
 const STEAM_OPENID_URL = 'https://steamcommunity.com/openid/login';
-const FRONTEND_URL = process.env.NEXT_PUBLIC_FRONTEND_URL || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+const FRONTEND_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 const STEAM_API_KEY = process.env.STEAM_API_KEY;
 
 // Interfaces para la respuesta de la API de Steam
