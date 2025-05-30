@@ -101,7 +101,7 @@ export async function GET(req: NextRequest) {
     }
 
     // Build Steam API URL
-    let steamApiUrl = `https://steamcommunity.com/inventory/${steamId}/${appId}/${contextId}?l=english&count=${count}`;
+    let steamApiUrl = `https://steam-inventory-api.maliagapacheco.workers.dev/inventory/${steamId}/${appId}/${contextId}?l=english&count=${count}`;
     
     if (startAssetId) {
       steamApiUrl += `&start_assetid=${startAssetId}`;
