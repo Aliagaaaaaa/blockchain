@@ -93,4 +93,107 @@ export interface SteamCallbackParams {
   message?: string;
   steam_link_success?: string;
   data?: string;
+}
+
+// Steam Inventory types for Counter Strike 2
+export interface SteamInventoryItem {
+  assetid: string;
+  classid: string;
+  instanceid: string;
+  amount: string;
+  pos: number;
+  id: string;
+  market_hash_name: string;
+  market_name: string;
+  name: string;
+  name_color?: string;
+  type: string;
+  icon_url: string;
+  icon_url_large?: string;
+  tradable: number;
+  marketable: number;
+  commodity: number;
+  market_tradable_restriction?: number;
+  market_marketable_restriction?: number;
+  descriptions?: Array<{
+    type: string;
+    value: string;
+    color?: string;
+  }>;
+  tags?: Array<{
+    category: string;
+    internal_name: string;
+    localized_category_name: string;
+    localized_tag_name: string;
+    color?: string;
+  }>;
+  actions?: Array<{
+    link: string;
+    name: string;
+  }>;
+  market_actions?: Array<{
+    link: string;
+    name: string;
+  }>;
+}
+
+export interface SteamInventoryResponse {
+  success: boolean;
+  total_inventory_count?: number;
+  assets?: SteamInventoryItem[];
+  descriptions?: Array<{
+    appid: number;
+    classid: string;
+    instanceid: string;
+    icon_url: string;
+    icon_url_large?: string;
+    name: string;
+    market_hash_name: string;
+    market_name: string;
+    name_color?: string;
+    background_color?: string;
+    type: string;
+    tradable: number;
+    marketable: number;
+    commodity: number;
+    market_tradable_restriction?: number;
+    market_marketable_restriction?: number;
+    descriptions?: Array<{
+      type: string;
+      value: string;
+      color?: string;
+    }>;
+    tags?: Array<{
+      category: string;
+      internal_name: string;
+      localized_category_name: string;
+      localized_tag_name: string;
+      color?: string;
+    }>;
+    actions?: Array<{
+      link: string;
+      name: string;
+    }>;
+    market_actions?: Array<{
+      link: string;
+      name: string;
+    }>;
+  }>;
+  error?: string;
+  more_items?: number;
+  last_assetid?: string;
+  more_start?: number;
+}
+
+export interface InventoryFilters {
+  search: string;
+  rarity: string;
+  type: string;
+  tradable: boolean | null;
+  marketable: boolean | null;
+}
+
+export interface SteamInventoryProps {
+  steamId: string;
+  className?: string;
 } 
