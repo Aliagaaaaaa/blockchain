@@ -10,6 +10,7 @@ import { WalletAddress } from '@/components/WalletAddress';
 import { OnboardingProgress } from '@/components/OnboardingProgress';
 import SteamLinkForm from '@/components/SteamLinkForm';
 import TradeUrlForm from '@/components/TradeUrlForm';
+import { SteamInventory } from '@/components/SteamInventory';
 import { useOnboarding } from '@/hooks/useOnboarding';
 import { ONBOARDING_STEPS } from '@/constants/onboarding';
 import { ROUTES } from '@/constants/routes';
@@ -164,88 +165,88 @@ function DashboardView({ steamData, walletAddress, disconnect }: DashboardViewPr
                 </Button>
               </div>
             </div>
-          </CardHeader>
-        </Card>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <Card>
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-xl">Wallet</CardTitle>
-                <Badge variant="secondary">
-                  Conectada
-                </Badge>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <WalletAddress address={walletAddress || ''} />
-                <div className="flex items-center">
-                  <div className="w-3 h-3 bg-primary rounded-full mr-2"></div>
-                  <span className="text-sm font-medium">En línea</span>
+            
+            {/* Información del usuario */}
+            <div className="mt-6 pt-6 border-t">
+              <div className="flex flex-col sm:flex-row gap-6">
+                {/* Información de Wallet */}
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                    <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium">Wallet</p>
+                    <WalletAddress address={walletAddress || ''} />
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
 
-          <Card>
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-xl">Steam</CardTitle>
-                <Badge variant="secondary">
-                  {steamData ? 'Vinculada' : 'No vinculada'}
-                </Badge>
-              </div>
-            </CardHeader>
-            <CardContent>
-              {steamData ? (
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-3">
-                    <Avatar className="h-12 w-12">
+                {/* Información de Steam */}
+                {steamData ? (
+                  <div className="flex items-center gap-3">
+                    <Avatar className="h-10 w-10">
                       <AvatarImage 
                         src={steamData.steam_avatar} 
                         alt={`Avatar de ${steamData.steam_username}`}
                       />
                       <AvatarFallback>
-                        {steamData.steam_username?.charAt(0).toUpperCase()}
+                        <FaSteam className="w-5 h-5" />
                       </AvatarFallback>
                     </Avatar>
                     <div>
-                      <p className="font-medium">{steamData.steam_username}</p>
-                      <p className="text-sm text-muted-foreground">{steamData.steam_id}</p>
+                      <p className="text-sm font-medium">Steam</p>
+                      <p className="text-sm text-muted-foreground">{steamData.steam_username}</p>
                     </div>
                   </div>
-                  <div className="flex items-center">
-                    <div className="w-3 h-3 bg-primary rounded-full mr-2"></div>
-                    <span className="text-sm font-medium">Vinculada</span>
+                ) : (
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-muted rounded-full flex items-center justify-center">
+                      <FaSteam className="w-5 h-5 text-muted-foreground" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium">Steam</p>
+                      <p className="text-sm text-muted-foreground">No vinculada</p>
+                    </div>
                   </div>
-                </div>
-              ) : (
-                <p className="text-muted-foreground">No disponible</p>
-              )}
-            </CardContent>
-          </Card>
-        </div>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Inventario de Skins</CardTitle>
-            <CardDescription>Gestiona tus skins de CS2</CardDescription>
+                )}
+              </div>
+            </div>
           </CardHeader>
-          <CardContent>
-            <div className="text-center py-12">
+        </Card>
+
+        {/* Inventario directo sin card contenedora */}
+        {walletAddress ? (
+          steamData?.steam_id ? (
+            <SteamInventory steamId={steamData.steam_id} />
+          ) : (
+            <Card>
+              <CardContent className="text-center py-12">
+                <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
+                  <FaSteam className="w-8 h-8 text-muted-foreground" />
+                </div>
+                <h3 className="text-lg font-medium mb-2">Steam no vinculado</h3>
+                <p className="text-muted-foreground">
+                  Para ver tu inventario de CS2, primero vincula tu cuenta de Steam en el proceso de configuración.
+                </p>
+              </CardContent>
+            </Card>
+          )
+        ) : (
+          <Card>
+            <CardContent className="text-center py-12">
               <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg className="w-8 h-8 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                 </svg>
               </div>
-              <h3 className="text-lg font-medium mb-2">Próximamente</h3>
+              <h3 className="text-lg font-medium mb-2">Wallet no conectada</h3>
               <p className="text-muted-foreground">
-                Aquí podrás ver y gestionar tus skins de CS2
+                Conecta tu wallet para ver tu inventario de CS2
               </p>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        )}
       </div>
     </div>
   );
@@ -330,7 +331,14 @@ function SetTradeUrlStep({ walletAddress, steamData, onSuccess, onError }: SetTr
                     {steamData.steam_username?.charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
-                <p className="font-medium">{steamData.steam_username}</p>
+                <div>
+                  <p className="font-medium">{steamData.steam_username}</p>
+                  <p className="text-sm text-muted-foreground">{steamData.steam_id}</p>
+                </div>
+              </div>
+              <div className="flex items-center">
+                <div className="w-3 h-3 bg-primary rounded-full mr-2"></div>
+                <span className="text-sm font-medium">Vinculada</span>
               </div>
             </div>
           )}
