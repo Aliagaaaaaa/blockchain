@@ -1,10 +1,17 @@
-// Existing exports
-export { LoadingSpinner } from './LoadingSpinner';
-export { OnboardingProgress } from './OnboardingProgress';
+// Form exports
 export { default as SteamLinkForm } from './SteamLinkForm';
 export { default as TradeUrlForm } from './TradeUrlForm';
+
+// Component exports  
 export { WalletAddress } from './WalletAddress';
+export { LoadingSpinner } from './LoadingSpinner';
+export { OnboardingProgress } from './OnboardingProgress';
 
 // Steam Inventory exports
 export { SteamInventory, default as SteamInventoryDefault } from './SteamInventory';
-export { SteamInventoryExample, default as SteamInventoryExampleDefault } from './SteamInventoryExample'; 
+
+// Blockchain exports
+export { BlockchainPanel, default as BlockchainPanelDefault } from './BlockchainPanel';
+
+// Combined components
+export { InventoryWithBlockchain, default as InventoryWithBlockchainDefault } from './InventoryWithBlockchain'; 
