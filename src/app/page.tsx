@@ -10,7 +10,7 @@ import { WalletAddress } from '@/components/WalletAddress';
 import { OnboardingProgress } from '@/components/OnboardingProgress';
 import SteamLinkForm from '@/components/SteamLinkForm';
 import TradeUrlForm from '@/components/TradeUrlForm';
-import { SteamInventory } from '@/components/SteamInventory';
+import { InventoryWithBlockchain } from '@/components/InventoryWithBlockchain';
 import { useOnboarding } from '@/hooks/useOnboarding';
 import { ONBOARDING_STEPS } from '@/constants/onboarding';
 import { ROUTES } from '@/constants/routes';
@@ -218,7 +218,7 @@ function DashboardView({ steamData, walletAddress, disconnect }: DashboardViewPr
         {/* Inventario directo sin card contenedora */}
         {walletAddress ? (
           steamData?.steam_id ? (
-            <SteamInventory steamId={steamData.steam_id} />
+            <InventoryWithBlockchain steamId={steamData.steam_id} />
           ) : (
             <Card>
               <CardContent className="text-center py-12">
